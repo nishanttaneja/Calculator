@@ -28,8 +28,30 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func operationSelected(_ sender: UIButton!) {
+        if allClearButton.currentTitle == "AC" {allClearButton.setTitle("C", for: .normal)}
+        if sender.currentTitle == "±" {
+            let numInDouble = Double(numberLabel.text!)! * (-1)
+            if numInDouble.canBeInt() {numberLabel.text = String(numInDouble.getIntValue())}
+            else {numberLabel.text = String(numInDouble)}
+            return
+        }
         didFinishEnteringNumber = true
-        if sender.currentTitle == "C" {allClearButton.setTitle("AC", for: .normal); numberLabel.text = "0"}
+        if sender.currentTitle == "C" {allClearButton.setTitle("AC", for: .normal); numberLabel.text = "0"; return}
+        
+    }
+}
+
+//MARK: - DoubleIsInt
+extension Double {
+    func canBeInt() -> Bool {
+        // Returns true if Double is equal to Int
+        let numInInt = Int(self)
+        if Double(numInInt) == self {return true}
+        return false
+    }
+    func getIntValue() -> Int {
+        // Returns Int value
+        return Int(self)
     }
 }
 
