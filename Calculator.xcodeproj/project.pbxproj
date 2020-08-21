@@ -16,6 +16,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B45F7D2D24EFFD160035080E /* LaunchScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchScreen.png; sourceTree = "<group>"; };
+		B45F7D2E24EFFD170035080E /* HomeScreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HomeScreen.png; sourceTree = "<group>"; };
+		B45F7D2F24EFFD240035080E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B466B0D124EF896A00585A81 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B466B0D424EF896A00585A81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B466B0D624EF896A00585A81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,9 +40,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B45F7D2C24EFFD070035080E /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				B45F7D2E24EFFD170035080E /* HomeScreen.png */,
+				B45F7D2D24EFFD160035080E /* LaunchScreen.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		B466B0C824EF896A00585A81 = {
 			isa = PBXGroup;
 			children = (
+				B45F7D2F24EFFD240035080E /* README.md */,
+				B45F7D2C24EFFD070035080E /* Screenshots */,
 				B466B0D324EF896A00585A81 /* Calculator */,
 				B466B0D224EF896A00585A81 /* Products */,
 			);
