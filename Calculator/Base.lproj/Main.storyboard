@@ -293,6 +293,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="allClearButton" destination="xgU-7s-5Bh" id="NdA-Bo-vtw"/>
                         <outlet property="numberLabel" destination="Jib-xx-L0B" id="4i5-KJ-kuM"/>
                     </connections>
                 </viewController>
