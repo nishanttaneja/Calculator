@@ -25,6 +25,14 @@ class ViewController: UIViewController {
             else {numberLabel.text = String(newValue!)}
         }
     }
+    private var previousValue: Double?
+    private var hasPreviousValue: Bool {
+        get {
+            if let _ = previousValue {return true}
+            return false
+        }
+    }
+    private var operation: String?
     
     // IBActions
     @IBAction func numberSelected(_ sender: UIButton!) {
@@ -40,7 +48,13 @@ class ViewController: UIViewController {
     }
     @IBAction func operationSelected(_ sender: UIButton!) {
         // =,+,-,x,÷,%,±,AC/C
-        if allClearButton.currentTitle == "AC" {allClearButton.setTitle("C", for: .normal)}
+        if allClearButton.currentTitle == "AC" {
+            allClearButton.setTitle("C", for: .normal)
+            currentValue = nil
+            previousValue = nil
+            operation = nil
+        }
+        didFinishEnteringNumber = true
         if sender.currentTitle == "±" {
             didFinishEnteringNumber = false     // Continue editing number till a mathematical operation is applied again
             let numInDouble = Double(numberLabel.text!)! * (-1)
@@ -48,13 +62,33 @@ class ViewController: UIViewController {
             else {numberLabel.text = String(numInDouble)}
             return
         }
-        didFinishEnteringNumber = true
-        if sender.currentTitle == "C" {allClearButton.setTitle("AC", for: .normal); numberLabel.text = "0"; return}
-        if sender.currentTitle == "%" {currentValue! /= 100}
+        else if sender.currentTitle == "C" {allClearButton.setTitle("AC", for: .normal); numberLabel.text = "0"; return}
+        else if sender.currentTitle == "%" {currentValue! /= 100}
+        else {
+            if previousValue == nil {
+                previousValue = currentValue
+                operation = sender.currentTitle
+            } else {
+                if hasPreviousValue {
+                    perform()
+                    operation = sender.currentTitle
+                    previousValue = currentValue
+                }
+            }
+        }
+    }
+    
+    private func perform() {
+        if let prevVal = previousValue, let curVal = currentValue {
+            if operation == "+" {currentValue = prevVal+curVal}
+            else if operation == "-" {currentValue = prevVal-curVal}
+            else if operation == "x" {currentValue = prevVal*curVal}
+            else if operation == "÷" {currentValue = prevVal/curVal}
+        }
     }
 }
 
-//MARK: - DoubleIsInt
+//MARK: - DoubleIsInt | Operations
 extension Double {
     func canBeInt() -> Bool {
         // Returns true if Double is equal to Int
