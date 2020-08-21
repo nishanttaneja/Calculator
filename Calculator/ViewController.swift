@@ -15,9 +15,20 @@ class ViewController: UIViewController {
     
     // Variables
     private var didFinishEnteringNumber: Bool = true
+    private var currentValue: Double? {
+        get {
+            let value = Double(numberLabel.text!)!
+            return value
+        }
+        set {
+            if newValue!.canBeInt() {numberLabel.text = String(newValue!.getIntValue())}
+            else {numberLabel.text = String(newValue!)}
+        }
+    }
     
     // IBActions
     @IBAction func numberSelected(_ sender: UIButton!) {
+        // .,0,1,2,3,4,5,6,7,8,9
         if allClearButton.currentTitle == "AC" {allClearButton.setTitle("C", for: .normal)}
         if sender.currentTitle == "." {
             if didFinishEnteringNumber {numberLabel.text = "0."; didFinishEnteringNumber=false; return}
@@ -28,8 +39,10 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func operationSelected(_ sender: UIButton!) {
+        // =,+,-,x,÷,%,±,AC/C
         if allClearButton.currentTitle == "AC" {allClearButton.setTitle("C", for: .normal)}
         if sender.currentTitle == "±" {
+            didFinishEnteringNumber = false     // Continue editing number till a mathematical operation is applied again
             let numInDouble = Double(numberLabel.text!)! * (-1)
             if numInDouble.canBeInt() {numberLabel.text = String(numInDouble.getIntValue())}
             else {numberLabel.text = String(numInDouble)}
@@ -37,7 +50,7 @@ class ViewController: UIViewController {
         }
         didFinishEnteringNumber = true
         if sender.currentTitle == "C" {allClearButton.setTitle("AC", for: .normal); numberLabel.text = "0"; return}
-        
+        if sender.currentTitle == "%" {currentValue! /= 100}
     }
 }
 
