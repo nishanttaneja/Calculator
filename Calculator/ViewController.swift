@@ -21,7 +21,8 @@ class ViewController: UIViewController {
             return value
         }
         set {
-            if newValue!.canBeInt() {numberLabel.text = String(newValue!.getIntValue())}
+            if newValue == nil {numberLabel.text = "0"; allClearButton.setTitle("AC", for: .normal)}
+            else if newValue!.canBeInt() {numberLabel.text = String(newValue!.getIntValue())}
             else {numberLabel.text = String(newValue!)}
         }
     }
@@ -48,12 +49,7 @@ class ViewController: UIViewController {
     }
     @IBAction func operationSelected(_ sender: UIButton!) {
         // =,+,-,x,÷,%,±,AC/C
-        if allClearButton.currentTitle == "AC" {
-            allClearButton.setTitle("C", for: .normal)
-            currentValue = nil
-            previousValue = nil
-            operation = nil
-        }
+        if allClearButton.currentTitle == "AC" {allClearButton.setTitle("C", for: .normal)}
         didFinishEnteringNumber = true
         if sender.currentTitle == "±" {
             didFinishEnteringNumber = false     // Continue editing number till a mathematical operation is applied again
@@ -62,7 +58,12 @@ class ViewController: UIViewController {
             else {numberLabel.text = String(numInDouble)}
             return
         }
-        else if sender.currentTitle == "C" {allClearButton.setTitle("AC", for: .normal); numberLabel.text = "0"; return}
+        else if sender.currentTitle == "C" {
+            currentValue = nil
+            previousValue = nil
+            operation = nil
+            return
+        }
         else if sender.currentTitle == "%" {currentValue! /= 100}
         else {
             if previousValue == nil {
